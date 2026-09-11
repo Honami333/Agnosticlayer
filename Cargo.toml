@@ -1,0 +1,24 @@
+[package]
+name = "agnosticlayer"
+version = "0.1.0"
+edition = "2024"
+
+documentation = "https://docs.rs/agnosticlayer"
+
+description = "A cheap, drop-in way to add UI data to your engine — no decisions about which dependency to pull in, no wrestling with how complicated it should be. Built as the tool I wanted for myself, now it's yours."
+
+license = "MIT"
+
+repository = "https://github.com/Honami333/agnosticlayer"
+
+keywords = ["ui", "widget", "data-oriented", "headless", "renderer-agnostic"]
+
+categories = ["data-structures", "gui", "rendering", "game-engines"]
+
+exclude = [
+    ".github/*",
+    "target/*",
+]
+
+[dependencies]
+wibr = "0.2.11"
