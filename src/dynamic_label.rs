@@ -5,7 +5,7 @@ use crate::node::Node;
 
 
 #[derive(Debug, Clone, PartialEq, New, Default)]
-pub struct DynamicLable<Id: WidgetId> {
+pub struct DynamicLabel<Id: WidgetId> {
     pub node: Node<Id>,
     pub rotate: Rotate,
     pub text_style: DynamicTextStyle,
@@ -13,7 +13,7 @@ pub struct DynamicLable<Id: WidgetId> {
     pub visual_mode: VisualMode,
 }
 
-impl<Id> DynamicLable<Id>
+impl<Id> DynamicLabel<Id>
 where 
     Id: WidgetId
 {

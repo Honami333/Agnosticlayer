@@ -65,7 +65,7 @@ type Id = u32;
 Any generic parameter the crate exposes can be filled with `Void` when you don't need it. `Void` implements `TextItem` (returns its type name) and works as an id, image handle, or shape type too. A tuple like `()` works for everything *except* the text parameter — there, `Void` is the placeholder to reach for.
 
 ```rust
-use agnosticlayer::base_date::Void;
+use agnosticlayer::base_data::Void;
 
 // image handle, hit shapes, and text all unused:
 type MyLayer = Layer<Void, Void, Void, Void, u32>;
@@ -105,10 +105,10 @@ layer.add_container(root);
 Parenthood is just a field. The container doesn't know the label exists until you walk the tree.
 
 ```rust
-use agnosticlayer::lable::{Lable, TextStyle};
+use agnosticlayer::lable::{Label, TextStyle};
 use agnosticlayer::base_date::{FontSize, LineHeight, LetterSpacing, Align};
 
-let label = Lable::new(
+let label = Label::new(
     Node::new(2u32, Transform::default(), Size::new(120.0, 24.0), Scale::default(), Some(1u32)),
     Rotate::default(),
     TextStyle::new(Label("Hello"), FontSize::Default, Color::from_u32(0xFFFFFFFF), LineHeight::Default, LetterSpacing::Default, Align::CenterCenter),
