@@ -2,12 +2,12 @@ use std::collections::HashMap;
 
 use wibr::Make;
 
-use crate::base_date::*;
+use crate::base_data::*;
 use crate::container::Container;
-use crate::dynamic_lable::DunamicLable;
+use crate::dynamic_lable::DynamicLable;
 use crate::hit::HitLayer;
 use crate::image::Image;
-use crate::lable::Lable;
+use crate::label::Label;
 use crate::node::Node;
 
 
@@ -20,23 +20,10 @@ pub struct Layer<SVec: ShapeVec = Void, SMap: ShapeMap = Void, ImageHandle: Imag
 #[derive(Debug, Clone, PartialEq, Make, Default)]
 pub struct WidgetMaps<ImageHandle: ImageItem, Text: TextItem, Id: WidgetId> {
     #[Some(HashMap::new())] pub node_map: HashMap<Id, Node<Id>>,
-    #[Some(HashMap::new())] pub lable_map: HashMap<Id, Lable<Text, Id>>,
-    #[Some(HashMap::new())] pub dunamic_lable_map: HashMap<Id, DunamicLable<Id>>,
+    #[Some(HashMap::new())] pub lable_map: HashMap<Id, Label<Text, Id>>,
+    #[Some(HashMap::new())] pub dunamic_lable_map: HashMap<Id, DynamicLable<Id>>,
     #[Some(HashMap::new())] pub container_map: HashMap<Id, Container<Id>>,
     #[Some(HashMap::new())] pub image_map: HashMap<Id, Image<ImageHandle, Id>>
-}
-
-impl<SVec, SMap, ImageHandle, Text, Id> Layer<SVec, SMap, ImageHandle, Text, Id> 
-where
-    SVec: ShapeVec,
-    SMap: ShapeMap,
-    ImageHandle: ImageItem,
-    Text: TextItem,
-    Id: WidgetId
-{
-    pub fn get_container_id(&self, id: Id) -> Option<Container<Id>> {
-        self.get_container_map().get(&id).copied()
-    }
 }
 
 // Node
@@ -52,8 +39,8 @@ where
         self.get_mut_node_map().insert(node.id, node);
     }
 
-    pub fn remove_node(&mut self, node: Node<Id>) -> Option<Node<Id>> {
-        self.get_mut_node_map().remove(&node.id)
+    pub fn remove_node(&mut self, id: Id) -> Option<Node<Id>> {
+        self.get_mut_node_map().remove(&id)
     }
 
     pub fn update_node(&mut self, node: Node<Id>) {
@@ -71,7 +58,7 @@ where
     }
 
     pub fn get_container_node(&self, node: Node<Id>) -> Option<Container<Id>> {
-        self.get_container_id(node.parent?)
+        self.get_container(node.parent?)
     }
     
     pub fn get_node_map(&self) -> &HashMap<Id, Node<Id>> {
@@ -92,37 +79,37 @@ where
     Text: TextItem,
     Id: WidgetId
 {
-    pub fn add_lable(&mut self, lable: Lable<Text, Id>) {
+    pub fn add_lable(&mut self, lable: Label<Text, Id>) {
         self.get_mut_lable_map().insert(lable.node.id, lable);
     }
 
-    pub fn remove_lable(&mut self, lable: Lable<Text, Id>) -> Option<Lable<Text, Id>> {
-        self.get_mut_lable_map().remove(&lable.node.id)
+    pub fn remove_lable(&mut self, id: Id) -> Option<Label<Text, Id>> {
+        self.get_mut_lable_map().remove(&id)
     }
 
-    pub fn update_lable(&mut self, lable: Lable<Text, Id>) {
+    pub fn update_lable(&mut self, lable: Label<Text, Id>) {
         if let Some(last_lable) = self.get_mut_lable(lable.node.id) {
             *last_lable = lable;
         };
     }
 
-    pub fn get_lable(&self, id: Id) -> Option<Lable<Text, Id>> {
+    pub fn get_lable(&self, id: Id) -> Option<Label<Text, Id>> {
         self.get_lable_map().get(&id).copied()
     }
 
-    pub fn get_mut_lable(&mut self, id: Id) -> Option<&mut Lable<Text, Id>>{
+    pub fn get_mut_lable(&mut self, id: Id) -> Option<&mut Label<Text, Id>>{
         self.get_mut_lable_map().get_mut(&id)
     }
 
-    pub fn get_container_lable(&self, lable: Lable<Text, Id>) -> Option<Container<Id>> {
+    pub fn get_container_lable(&self, lable: Label<Text, Id>) -> Option<Container<Id>> {
         self.get_container_node(lable.node)
     }
 
-    pub fn get_lable_map(&self) -> &HashMap<Id, Lable<Text, Id>> {
+    pub fn get_lable_map(&self) -> &HashMap<Id, Label<Text, Id>> {
         &self.widget.lable_map
     }
 
-    pub fn get_mut_lable_map(&mut self) -> &mut HashMap<Id, Lable<Text, Id>> {
+    pub fn get_mut_lable_map(&mut self) -> &mut HashMap<Id, Label<Text, Id>> {
         &mut self.widget.lable_map
     }
 }
@@ -140,8 +127,8 @@ where
         self.get_mut_container_map().insert(container.node.id, container);
     }
 
-    pub fn remove_container(&mut self, container: Container<Id>) -> Option<Container<Id>> {
-        self.get_mut_container_map().remove(&container.node.id)
+    pub fn remove_container(&mut self, id: Id) -> Option<Container<Id>> {
+        self.get_mut_container_map().remove(&id)
     }
 
     pub fn update_container(&mut self, container: Container<Id>) {
@@ -184,8 +171,8 @@ where
         self.get_mut_image_map().insert(image_handle.node.id, image_handle);
     }
 
-    pub fn remove_image(&mut self, image_handle: Image<ImageHandle, Id>) -> Option<Image<ImageHandle, Id>> {
-        self.get_mut_image_map().remove(&image_handle.node.id)
+    pub fn remove_image(&mut self, id: Id) -> Option<Image<ImageHandle, Id>> {
+        self.get_mut_image_map().remove(&id)
     }
 
     pub fn update_image(&mut self, image_handle: Image<ImageHandle, Id>) {
@@ -220,37 +207,37 @@ where
     Text: TextItem,
     Id: WidgetId
 {
-    pub fn add_dunamic_lable(&mut self, dunamic_lable: DunamicLable<Id>) {
+    pub fn add_dunamic_lable(&mut self, dunamic_lable: DynamicLable<Id>) {
         self.get_mut_dunamic_lable_map().insert(dunamic_lable.node.id, dunamic_lable);
     }
 
-    pub fn remove_dunamic_lable(&mut self, id: Id) -> Option<DunamicLable<Id>> {
+    pub fn remove_dunamic_lable(&mut self, id: Id) -> Option<DynamicLable<Id>> {
         self.get_mut_dunamic_lable_map().remove(&id)
     }
 
-    pub fn update_dunamic_lable(&mut self, dunamic_lable: DunamicLable<Id>) {
+    pub fn update_dunamic_lable(&mut self, dunamic_lable: DynamicLable<Id>) {
         if let Some(last_dunamic_lable) = self.get_mut_dunamic_lable(dunamic_lable.node.id) {
             *last_dunamic_lable = dunamic_lable;
         };
     }
 
-    pub fn get_dunamic_lable(&self, id: Id) -> Option<&DunamicLable<Id>> {
+    pub fn get_dunamic_lable(&self, id: Id) -> Option<&DynamicLable<Id>> {
         self.get_dunamic_lable_map().get(&id)
     }
 
-    pub fn get_mut_dunamic_lable(&mut self, id: Id) -> Option<&mut DunamicLable<Id>>{
+    pub fn get_mut_dunamic_lable(&mut self, id: Id) -> Option<&mut DynamicLable<Id>>{
         self.get_mut_dunamic_lable_map().get_mut(&id)
     }
 
-    pub fn get_container_dunamic_lable(&self, dunamic_lable: &DunamicLable<Id>) -> Option<Container<Id>> {
+    pub fn get_container_dunamic_lable(&self, dunamic_lable: &DynamicLable<Id>) -> Option<Container<Id>> {
         self.get_container_node(dunamic_lable.node)
     }
 
-    pub fn get_dunamic_lable_map(&self) -> &HashMap<Id, DunamicLable<Id>> {
+    pub fn get_dunamic_lable_map(&self) -> &HashMap<Id, DynamicLable<Id>> {
         &self.widget.dunamic_lable_map
     }
 
-    pub fn get_mut_dunamic_lable_map(&mut self) -> &mut HashMap<Id, DunamicLable<Id>> {
+    pub fn get_mut_dunamic_lable_map(&mut self) -> &mut HashMap<Id, DynamicLable<Id>> {
         &mut self.widget.dunamic_lable_map
     }
 }
@@ -273,7 +260,7 @@ where
     }
 
     pub fn remove_hit_in_vec(&mut self, data: SVec) -> Option<(SVec, Id)> {
-        let index = self.get_hit_vec().iter().position(|(d, _)| * d == data)?;
+        let index = self.get_hit_vec().iter().position(|(d, _)| *d == data)?;
         Some(self.get_mut_hit_vec().swap_remove(index))
     }
 

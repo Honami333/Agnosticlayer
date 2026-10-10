@@ -20,7 +20,11 @@ impl<T: Copy + Hash + Eq> ShapeMap for T {}
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 pub struct Void;
 
-impl TextItem for Void { fn as_text(&self) -> &str { std::any::type_name::<Void>() }}
+impl TextItem for () { fn as_text(&self) -> &str { "" }}
+
+impl TextItem for Void { fn as_text(&self) -> &str { "" }}
+
+impl TextItem for &str { fn as_text(&self) -> &str { self }}
 
 pub enum WidgetType {
     Node,

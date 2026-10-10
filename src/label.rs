@@ -1,11 +1,11 @@
 use wibr::New;
 
-use crate::base_date::*;
+use crate::base_data::*;
 use crate::node::Node;
 
 
 #[derive(Debug, Clone, Copy, PartialEq, New, Default)]
-pub struct Lable<Text: TextItem, Id: WidgetId> {
+pub struct Label<Text: TextItem, Id: WidgetId> {
     pub node: Node<Id>,
     pub rotate: Rotate,
     pub text_style: TextStyle<Text>,
@@ -13,7 +13,7 @@ pub struct Lable<Text: TextItem, Id: WidgetId> {
     pub visual_mode: VisualMode,
 }
 
-impl<Text, Id> Lable<Text, Id>
+impl<Text, Id> Label<Text, Id>
 where 
     Text: TextItem,
     Id: WidgetId

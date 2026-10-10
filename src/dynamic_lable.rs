@@ -1,19 +1,19 @@
 use wibr::New;
 
-use crate::base_date::*;
+use crate::base_data::*;
 use crate::node::Node;
 
 
 #[derive(Debug, Clone, PartialEq, New, Default)]
-pub struct DunamicLable<Id: WidgetId> {
+pub struct DynamicLable<Id: WidgetId> {
     pub node: Node<Id>,
     pub rotate: Rotate,
-    pub text_style: DunamicTextStyle,
+    pub text_style: DynamicTextStyle,
     pub color: Color,
     pub visual_mode: VisualMode,
 }
 
-impl<Id> DunamicLable<Id>
+impl<Id> DynamicLable<Id>
 where 
     Id: WidgetId
 {
@@ -21,7 +21,7 @@ where
 }
 
 #[derive(Debug, Clone, PartialEq, New, Default)]
-pub struct DunamicTextStyle {
+pub struct DynamicTextStyle {
     pub text: String,
     pub font_size: FontSize,
     pub color: Color,
@@ -30,4 +30,4 @@ pub struct DunamicTextStyle {
     pub align: Align,
 }
 
-impl DunamicTextStyle { pub fn as_text(&self) -> &str { self.text.as_str() } }
+impl DynamicTextStyle { pub fn as_text(&self) -> &str { self.text.as_str() } }
