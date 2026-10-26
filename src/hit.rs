@@ -4,7 +4,6 @@ use wibr::Make;
 
 use crate::base_data::*;
 
-
 #[derive(Debug, Clone, PartialEq, Make, Default)]
 pub struct HitLayer<SVec: ShapeVec, SMap: ShapeMap, Id: WidgetId> {
     #[Some(Vec::new())] pub shape_vec: Vec<(SVec, Id)>,
@@ -28,4 +27,3 @@ where
     pub fn find_map(&self, data: SMap) -> Option<Id> { self.shape_map.get(&data).copied() }
     pub fn find_mut_map(&mut self, data: SMap) -> Option<&mut Id> { self.shape_map.get_mut(&data) }
 }
-

@@ -10,7 +10,6 @@ use crate::image::Image;
 use crate::label::Label;
 use crate::node::Node;
 
-
 #[derive(Debug, Clone, PartialEq, Make, Default)]
 pub struct Layer<SVec: ShapeVec = Void, SMap: ShapeMap = Void, ImageHandle: ImageItem = Void, Text: TextItem = Void, Id: WidgetId = Void> {
     #[Some(WidgetMaps::new())] pub widget: WidgetMaps<ImageHandle, Text, Id>,
@@ -21,7 +20,7 @@ pub struct Layer<SVec: ShapeVec = Void, SMap: ShapeMap = Void, ImageHandle: Imag
 pub struct WidgetMaps<ImageHandle: ImageItem, Text: TextItem, Id: WidgetId> {
     #[Some(HashMap::new())] pub node_map: HashMap<Id, Node<Id>>,
     #[Some(HashMap::new())] pub label_map: HashMap<Id, Label<Text, Id>>,
-    #[Some(HashMap::new())] pub dunamic_label_map: HashMap<Id, DynamicLabel<Id>>,
+    #[Some(HashMap::new())] pub dynamic_label_map: HashMap<Id, DynamicLabel<Id>>,
     #[Some(HashMap::new())] pub container_map: HashMap<Id, Container<Id>>,
     #[Some(HashMap::new())] pub image_map: HashMap<Id, Image<ImageHandle, Id>>
 }
@@ -207,38 +206,38 @@ where
     Text: TextItem,
     Id: WidgetId
 {
-    pub fn add_dunamic_label(&mut self, dunamic_label: DynamicLabel<Id>) {
-        self.get_mut_dunamic_label_map().insert(dunamic_label.node.id, dunamic_label);
+    pub fn add_dynamic_label(&mut self, dynamic_label: DynamicLabel<Id>) {
+        self.get_mut_dynamic_label_map().insert(dynamic_label.node.id, dynamic_label);
     }
 
-    pub fn remove_dunamic_label(&mut self, id: Id) -> Option<DynamicLabel<Id>> {
-        self.get_mut_dunamic_label_map().remove(&id)
+    pub fn remove_dynamic_label(&mut self, id: Id) -> Option<DynamicLabel<Id>> {
+        self.get_mut_dynamic_label_map().remove(&id)
     }
 
-    pub fn update_dunamic_label(&mut self, dunamic_label: DynamicLabel<Id>) {
-        if let Some(last_dunamic_label) = self.get_mut_dunamic_label(dunamic_label.node.id) {
-            *last_dunamic_label = dunamic_label;
+    pub fn update_dynamic_label(&mut self, dynamic_label: DynamicLabel<Id>) {
+        if let Some(last_dynamic_label) = self.get_mut_dynamic_label(dynamic_label.node.id) {
+            *last_dynamic_label = dynamic_label;
         };
     }
 
-    pub fn get_dunamic_label(&self, id: Id) -> Option<&DynamicLabel<Id>> {
-        self.get_dunamic_label_map().get(&id)
+    pub fn get_dynamic_label(&self, id: Id) -> Option<&DynamicLabel<Id>> {
+        self.get_dynamic_label_map().get(&id)
     }
 
-    pub fn get_mut_dunamic_label(&mut self, id: Id) -> Option<&mut DynamicLabel<Id>>{
-        self.get_mut_dunamic_label_map().get_mut(&id)
+    pub fn get_mut_dynamic_label(&mut self, id: Id) -> Option<&mut DynamicLabel<Id>>{
+        self.get_mut_dynamic_label_map().get_mut(&id)
     }
 
-    pub fn get_container_dunamic_label(&self, dunamic_label: &DynamicLabel<Id>) -> Option<Container<Id>> {
-        self.get_container_node(dunamic_label.node)
+    pub fn get_container_dynamic_label(&self, dynamic_label: &DynamicLabel<Id>) -> Option<Container<Id>> {
+        self.get_container_node(dynamic_label.node)
     }
 
-    pub fn get_dunamic_label_map(&self) -> &HashMap<Id, DynamicLabel<Id>> {
-        &self.widget.dunamic_label_map
+    pub fn get_dynamic_label_map(&self) -> &HashMap<Id, DynamicLabel<Id>> {
+        &self.widget.dynamic_label_map
     }
 
-    pub fn get_mut_dunamic_label_map(&mut self) -> &mut HashMap<Id, DynamicLabel<Id>> {
-        &mut self.widget.dunamic_label_map
+    pub fn get_mut_dynamic_label_map(&mut self) -> &mut HashMap<Id, DynamicLabel<Id>> {
+        &mut self.widget.dynamic_label_map
     }
 }
 

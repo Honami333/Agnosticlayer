@@ -1,6 +1,6 @@
 [package]
 name = "agnosticlayer"
-version = "0.1.2"
+version = "0.2.0"
 edition = "2024"
 
 documentation = "https://docs.rs/agnosticlayer"
@@ -21,4 +21,4 @@ exclude = [
 ]
 
 [dependencies]
-wibr = "0.2.11"
+wibr = "0.2.16"

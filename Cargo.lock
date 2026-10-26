@@ -4,7 +4,7 @@ version = 4
 
 [[package]]
 name = "agnosticlayer"
-version = "0.1.2"
+version = "0.2.0"
 dependencies = [
  "wibr",
 ]
@@ -46,18 +46,18 @@ checksum = "e6e4313cd5fcd3dad5cafa179702e2b244f760991f45397d14d4ebf38247da75"
 
 [[package]]
 name = "wibr"
-version = "0.2.11"
+version = "0.2.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "47f787838776e10e04a4985e69511e838894582e3c5dd6c494098b070634170a"
+checksum = "813be5515e75bb3cb80579d97f7ad04b95e2c82f221a86f515bbb7edfdb9301d"
 dependencies = [
  "wibr-forge",
 ]
 
 [[package]]
 name = "wibr-forge"
-version = "0.2.11"
+version = "0.2.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e9cce1b24741dd4a1ca79287b0d18cd7883a71871e76dab632d064c29701ebce"
+checksum = "caeafb12d10740ca915ac702e53a28bea1c3924db55f7054482be27f581b1692"
 dependencies = [
  "proc-macro2",
  "quote",

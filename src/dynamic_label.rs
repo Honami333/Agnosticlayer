@@ -3,7 +3,6 @@ use wibr::New;
 use crate::base_data::*;
 use crate::node::Node;
 
-
 #[derive(Debug, Clone, PartialEq, New, Default)]
 pub struct DynamicLabel<Id: WidgetId> {
     pub node: Node<Id>,

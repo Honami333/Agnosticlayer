@@ -2,7 +2,6 @@ use std::hash::Hash;
 
 use wibr::New;
 
-
 pub trait WidgetId: Copy + Hash + Eq {}
 impl<T: Copy + Hash + Eq> WidgetId for T {}
 
@@ -16,7 +15,6 @@ impl<T: Copy + PartialEq> ShapeVec for T {}
 pub trait ShapeMap: Copy + Hash + Eq {}
 impl<T: Copy + Hash + Eq> ShapeMap for T {}
 
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 pub struct Void;
 
@@ -28,8 +26,8 @@ impl TextItem for &str { fn as_text(&self) -> &str { self }}
 
 pub enum WidgetType {
     Node,
-    Lable,
-    DunamicLable,
+    Label,
+    DynamicLabel,
     Container,
     Image
 }

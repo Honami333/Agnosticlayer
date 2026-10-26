@@ -1,8 +1,6 @@
-
 use wibr::New;
 
 use crate::base_data::*;
-
 
 #[derive(Debug, Clone, Copy, PartialEq, New, Default)]
 pub struct Node<Id: WidgetId> {
